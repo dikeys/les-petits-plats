@@ -1,0 +1,38 @@
+.header {
+  margin-top: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__logo {
+    margin: 0;
+  }
+  &__heading {
+    width: 268px;
+    height: 47px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+    color: $primary;
+    margin-top: 0;
+    font-family: "DM Sans", sans-serif;
+  }
+  &__form {
+    width: 94.8%;
+  }
+  &__searchbar {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+    background: $secondary;
+  }
+
+  &__submit {
+    position: relative;
+    border: none;
+    background: transparent;
+    float: right;
+    bottom: 78%;
+  }
+}

@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
-    <title>Les petits plats </title>
-  </head>
-  <body>
-    <header class="header">
-      <p class="header__logo">
-        <img
-          src="./assets/img/logo-chef.svg"
-          alt="logo toque cuisinier"
-          srcset=""
-        />
-      </p>
-      <h1 class="header__heading">Les petits plats</h1>
-      <form action="" class="header__form">
-        <input type="text" class="header__searchbar" placeholder="Rechercher une recette"/>
-        <button class="header__submit" type="submit">
-            <img src="/assets/img/search.svg" alt="" />
-        </button>
-      </form>
-    </header>
-    <main>
-      <section class="search">
-        <div >
-          <input class="search__ingredient" id="ingredient" name="ingredient" placeholder="Ingredients">
-          <ul id="list-ingredient"></ul>
-        </div>
-        <div>
-          <input class="search__device" list="list-device" id="device" name="device" placeholder="Appareils">
-          <ul id="list-device"></ul>
-        </div>
-        <div>
-          <input class="search__utensils" list="list-utensils" id="utensils" name="utensils" placeholder="Ustensiles">
-          <ul id="list-utensils"></ul>
-        </div>
-      </section>
-      <section class="recipe">
 
-      </section>
-    </main>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <title>Les petits plats </title>
+</head>
+
+<body>
+  <header class="header">
+    <p class="header__logo">
+      <img src="./assets/img/logo-chef.svg" alt="logo toque cuisinier" />
+    </p>
+    <h1 class="header__heading">Les petits plats</h1>
+    <form action="" class="header__form">
+      <input type="text" class="header__searchbar" placeholder="Rechercher une recette" />
+      <button class="header__submit" type="submit">
+        <img src="/assets/img/search.svg" alt="loupe de bouton recherche" />
+      </button>
+    </form>
+  </header>
+  <main>
+    <section class="search">
+      <div class="search__container">
+        <input class="search__ingredient" id="ingredient" name="ingredient" placeholder="Ingredients">
+        <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
+        <ul id="list-ingredient"></ul>
+      </div>
+      <div class="search__container">
+        <input class="search__device" list="list-device" id="device" name="device" placeholder="Appareils">
+        <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
+        <ul id="list-device"></ul>
+      </div>
+      <div class="search__container">
+        <input class="search__utensils" list="list-utensils" id="utensils" name="utensils" placeholder="Ustensiles">
+        <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
+        <ul id="list-utensils"></ul>
+      </div>
+    </section>
+    <section class="recipe">
+      <article class="card">
+        <p class="card__header"></p>
+        <div class="card__content">
+          <h3>Limonade de coco</h3>
+          <p>10 min</p>
+          <div>
+            <p class="card__ingredient">lait de coco : 400ml</p>
+            <p class="card__ingredient">Jus de citron : 2</p>
+            <p class="card__ingredient">Créme de coco : 4 cuillières</p>
+            <p class="card__ingredient">Sucre : 20g</p>
+            <p class="card__ingredient">Glaçons : 2</p>
+          </div>
+          <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et
+            le sucre. Mixer jusqu'à avoir la consistence désirée.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+
 </html>

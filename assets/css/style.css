@@ -415,7 +415,6 @@ template {
   font-weight: bolder;
 }
 .search__data-list {
-  position: absolute;
   border-radius: 5px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

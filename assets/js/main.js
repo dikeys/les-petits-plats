@@ -1,2 +1,2 @@
-import "./factory/recipe";
+import "./factory/recipeFactory";
 import "./page/index";

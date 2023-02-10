@@ -33,7 +33,7 @@ function arrayUstensils(recipeArray) {
   for (let recipes of recipeArray) {
     listAppliance.push(recipes.appliance);
   }
- 
+
   return removeDuplicates(listAppliance);
 }
 
@@ -57,12 +57,16 @@ function arrayAppliance(recipeArray) {
 }
 
 function removeDuplicates(array) {
-  return Array.from(
-    new Set(array.map(item => item.toLowerCase()))
-  ).map(item => {
+  let uniqueArray = new Set();
+  for (let item of array) {
+    uniqueArray.add(item.toLowerCase());
+  }
+  let result = [];
+  for (let item of uniqueArray) {
     let match = array.find(arrItem => arrItem.toLowerCase() === item);
-    return match || item;
-  });
+    result.push(match || item);
+  }
+  return result;
 }
 
 export { displaySearchOption };

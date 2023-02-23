@@ -6,6 +6,9 @@
   align-items: center;
   &__logo {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   &__heading {
     width: 268px;

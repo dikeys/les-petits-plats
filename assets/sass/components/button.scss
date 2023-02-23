@@ -1,0 +1,66 @@
+.btn {
+    padding: 1rem 1.3rem;
+    text-decoration: none;
+    border: none;
+
+
+    @each $colour,
+    $hex in $colors {
+        &--bg-#{""+$colour} {
+            background-color: $hex;
+        }
+    }
+
+    @each $colour,
+    $hex in $colors {
+        &--color-#{""+$colour} {
+            color: $hex;
+        }
+    }
+
+    @for $sizeY from 1 to 15 {
+        &--py-#{""+$sizeY} {
+            padding-top: $sizeY * .25rem;
+            padding-bottom: $sizeY * .25rem;
+
+        }
+    }
+
+    @for $width from 1 to 15 {
+        &--w-#{""+$width} {
+            width: $width * 5%;
+
+        }
+    }
+
+    @for $sizeL from 0 to 50 {
+        &--pl-#{""+$sizeL} {
+            padding-left: $sizeL * .25rem;
+        }
+    }
+
+    @for $sizeR from 0 to 50 {
+        &--pr-#{""+$sizeR} {
+            padding-right: $sizeR * .25rem;
+        }
+    }
+
+    @for $size from 0 to 50 {
+        &--mr-#{""+$size} {
+            margin-right: $size * .25rem;
+        }
+    }
+
+    @each $type,
+    $size in $rounded-sizes {
+        &--rounded-#{""+$type} {
+            border-radius: $size;
+        }
+    }
+
+    &--flex {
+        display: flex;
+        justify-content: center;
+    }
+
+}

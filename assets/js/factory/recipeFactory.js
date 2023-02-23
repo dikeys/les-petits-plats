@@ -1,11 +1,14 @@
-import { ajaxGet } from "../utils/requestFunc";
+import { ajaxGet } from "../utils/fetchFunc";
 import selector from "./const";
 
 async function createRecipesCard(recipeArray) {
   selector.recipeSection.innerHTML = "";
   for (let recipe of recipeArray) {
+    let a = document.createElement("a")
+    a.href = ""
+    a.classList.add("card");
     let article = document.createElement("article");
-    article.classList.add("card");
+   
     let pCardheader = document.createElement("p");
     pCardheader.classList.add("card__header");
     let divContent = document.createElement("div");
@@ -32,42 +35,23 @@ async function createRecipesCard(recipeArray) {
     divContent.appendChild(description);
     article.appendChild(pCardheader);
     article.appendChild(divContent);
-    selector.recipeSection.appendChild(article);
+    a.appendChild(article)
+    selector.recipeSection.appendChild(a);
   }
 
-  function addIngredientList(ingredientsList) {
-    let divContainer = document.createElement("div");
-    divContainer.classList.add("card__content__ingredient");
-    for (let ingredients of ingredientsList) {
-      let pIngredient = document.createElement("p");
 
-      pIngredient.textContent =
-        ingredients.ingredient +
-          " : " +
-          ingredients.quantity +
-          ingredients.unit || "";
-
-      divContainer.appendChild(pIngredient);
-    }
-    return divContainer;
-  }
 }
 
-export function getFilterRecipesCard(data, inputSelectors) {
-  let arrayRecipes = [];
-  for (const inputSelector of inputSelectors) {
-    inputSelector.addEventListener("input", e => {
-      arrayRecipes = [];
-      for (const recipe of data) {
-        for (const ingredient of recipe.ingredients) {
-          if (ingredient.ingredient.toLowerCase().includes(e.target.value.toLowerCase())) {
-            arrayRecipes.push(recipe);
-            break;
-          }
-        }
-      }
-      createRecipesCard(arrayRecipes);
-    });
+function addIngredientList(ingredientsList) {
+  let divContainer = document.createElement("ul");
+  divContainer.classList.add("card__content__ingredient");
+  for (let ingredients of ingredientsList) {
+    let pIngredient = document.createElement("li");
+
+    pIngredient.textContent = ingredients.ingredient + " : " + ingredients.quantity + (ingredients.unit ? ingredients.unit : "");
+
+    divContainer.appendChild(pIngredient);
   }
+  return divContainer;
 }
 export { createRecipesCard };

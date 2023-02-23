@@ -1,0 +1,84 @@
+.card {
+  // width: 30%;
+  overflow: hidden;
+  margin-bottom: 50px;
+  width: 460px;
+
+  &__header {
+    border-radius: 5px 5px 0px 0px;
+    background: #C7BEBE;
+    height: 178px;
+    margin: 0;
+  }
+
+  &__content {
+    padding: 20px;
+    background: #E7E7E7;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: .1fr .1fr;
+    row-gap: 20px;
+    height: 186px;
+
+
+    &__time {
+      font-size: 18px;
+      font-weight: 700;
+      grid-column-start: 4;
+      display: flex;
+      justify-content: center;
+    }
+
+
+    &__heading {
+      grid-column-start: 1;
+      grid-column-end: 4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: break-word;
+      width: 78%;
+    }
+
+    h3,
+    p {
+      margin: 0;
+    }
+
+    &__ingredient {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 14.4px;
+    }
+
+    &__instruction {
+
+      grid-column-start: 3;
+      grid-column-end: 5;
+      font-weight: 400;
+      line-height: 12px;
+      font-size: 12px;
+      width: 200px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: break-word;
+      height: 109px;
+
+    }
+  }
+
+}
+
+.recipe {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  position: absolute;
+  top: 400px;
+  margin-right: 78px;
+  column-gap: 50px;
+}

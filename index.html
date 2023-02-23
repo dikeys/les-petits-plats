@@ -13,10 +13,12 @@
 
 <body>
   <header class="header">
-    <p class="header__logo">
-      <img src="./assets/img/logo-chef.svg" alt="logo toque cuisinier" />
-    </p>
-    <h1 class="header__heading">Les petits plats</h1>
+    <a href="" class="header__logo">
+      <p>
+        <img src="./assets/img/logo-chef.svg" alt="logo toque cuisinier" />
+      </p>
+      <h1 class="header__heading">Les petits plats</h1>
+    </a>
     <form action="" class="header__form">
       <input type="text" class="header__searchbar" placeholder="Rechercher une recette" autocomplete="off" />
       <button class="header__submit" type="submit">
@@ -26,23 +28,26 @@
   </header>
   <main>
     <section class="search">
-
+      <div id="tag-list"></div>
       <div class="search__container">
+
         <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
-        <input class="search__ingredient search" id="ingredient" name="ingredient" placeholder="Ingredients"
-          autocomplete="off" >
+        <input class="search__ingredient search search__input" id="ingredient" name="ingredient" placeholder="Ingredients"
+          autocomplete="off" data-name="Ingredients" autocomplete="off">
         <datalist id="list-ingredient" class="search__ingredient"></datalist>
       </div>
 
       <div class="search__container">
         <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
-        <input class="search__appliance search" id="appliance" name="appliance" placeholder="Appareils">
+        <input class="search__appliance search search__input" id="appliance" name="appliance" placeholder="Appareils"
+          data-name="Appareils" autocomplete="off">
         <datalist id="list-appliance" class="search__appliance"></datalist>
       </div>
 
       <div class="search__container">
         <span class="search__sort-img"><img src="/assets/img/arrow.svg" alt=""></span>
-        <input class="search__utensils search" id="utensils" name="utensils" placeholder="Ustensiles">
+        <input class="search__utensils search search__input" id="utensils" name="utensils" placeholder="Ustensiles"
+          data-name="Ustensiles" autocomplete="off">
         <datalist id="list-utensils" class="search__utensils"></datalist>
       </div>
 

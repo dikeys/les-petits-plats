@@ -1,7 +1,6 @@
-import { ajaxGet } from "../utils/requestFunc";
 import selector from "./const";
 
-async function displaySearchOption(recipeArray) {
+async function displayDataListOption(recipeArray) {
   const arrays = [
     arrayUstensils(recipeArray),
     arrayAppliance(recipeArray),
@@ -19,9 +18,10 @@ async function displaySearchOption(recipeArray) {
 }
 
 function createOption(arrayOption, selector) {
+  selector.innerHTML = ""
   for (let optionData of arrayOption) {
     let option = document.createElement("option");
-    option.classList.add("search__datalist__option");
+    option.classList.add("search__data-list__option");
     option.value = optionData;
     option.textContent = optionData;
     selector.appendChild(option);
@@ -69,4 +69,4 @@ function removeDuplicates(array) {
   return result;
 }
 
-export { displaySearchOption };
+export { displayDataListOption };

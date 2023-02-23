@@ -1,8 +1,11 @@
 .search {
-  display: grid;
-  grid-template-columns: 0.1fr 0.1fr 0.1fr;
-  grid-gap: 10px;
-  column-gap: 25px;
+  display: flex;
+  position: relative;
+  z-index: 5;
+  flex-wrap: wrap;
+
+  position: relative;
+  z-index: 5;
 
   input {
     border: none;
@@ -25,11 +28,11 @@
       outline: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      width: 667px;
+      width: 617px;
+      transition: width 1s;
     }
-    &:focus .search__sort-img{
-      width: 300px;
-    }
+
+
   }
 
   &__ingredient {
@@ -46,6 +49,7 @@
 
   &__container {
     position: relative;
+    margin-right: 15px;
   }
 
   &__sort-img {
@@ -56,15 +60,23 @@
     top: 46px;
     font-size: x-large;
     font-weight: bolder;
+    z-index: 6;
+
+    &__active {
+      left: 633px;
+      transition: left 1s
+    }
   }
 
   &__data-list {
     border-radius: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    display: block;
     display: grid;
     grid-template-rows: repeat(10, auto);
     grid-template-columns: 199px 199px 199px;
+    animation: progress-bar 1s;
     row-gap: 10px;
     column-gap: 10px;
     color: $white;
@@ -73,73 +85,41 @@
     font-size: 18px;
     font-weight: 400;
 
-
     &__option {
+
       padding: 4px;
       cursor: pointer;
+      animation: progress-bar 1s;
 
+      &:first-letter {
+        text-transform: capitalize;
+      }
     }
   }
 }
 
-.card {
-  width: 30%;
-  overflow: hidden;
-  margin-bottom: 50px;
-
-  &__header {
-    border-radius: 5px 5px 0px 0px;
-    background: #C7BEBE;
-    height: 178px;
-    margin: 0;
-  }
-
-  &__content {
-    padding: 20px;
-    background: #E7E7E7;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: .1fr .1fr;
-    row-gap: 20px;
-    height: 186px;
-
-    &__time {
-      font-size: 18px;
-      font-weight: 700;
-      grid-column-start: 4;
-    }
-
-
-    &__heading {
-      grid-column-start: 1;
-      grid-column-end: 4;
-    }
-
-    h3,
-    p {
-      margin: 0;
-    }
-    &__ingredient{
-      grid-column-start: 1;
-      grid-column-end: 3;
-    }
-
-    &__instruction {
-
-      grid-column-start: 3;
-      grid-column-end: 5;
-      font-weight: 400;
-      line-height: 12px;
-      font-size: 12px;
-    }
-  }
-
-
-}
-
-.recipe {
+#tag-list {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 25px;
+}
+
+.tag-list {
+  &__close {
+    cursor: pointer;
+    padding-left: 10px;
+  }
+}
+
+
+
+
+@keyframes progress-bar {
+  from {
+    width: 146.7px;
+  }
+
+  to {
+    width: 679.5px;
+  }
+
 }

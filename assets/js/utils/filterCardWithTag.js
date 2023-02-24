@@ -33,9 +33,7 @@ import * as searchFactory from "../factory/searchFactory"
       }
     }
   
-    recipeFactory.createRecipesCard(matchingRecipes);
-    searchFactory.displayDataListOption(matchingRecipes)
-   
+   return matchingRecipes
 
   }
   export {filterRecipesCard, searchIngredient}

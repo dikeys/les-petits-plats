@@ -17,11 +17,17 @@ async function init() {
 
   tag.displayTagList(selector.inputSearch);
   tag.addTagButton(selector.tagContainer, recipes)
-  // tag.hideTagList(selector.inputSearch);
+  tag.hideTagList(selector.inputSearch);
   tag.filterTagList(selector.inputSearch);
   mainSearch.displayRecipeMainsearchBar(recipes)
  
   
+  for(let tag2 of document.querySelectorAll(".search__input")){
+    tag2.addEventListener("focusin", (e)=>{
+      tag.addTagButton(selector.tagContainer, recipes)
+      
+    })
+  }
 
 }
 

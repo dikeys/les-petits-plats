@@ -1,7 +1,7 @@
 import { selector } from "./selector";
 import * as recipeFactory from "../factory/recipeFactory";
-import * as optionFactory from "../factory/searchFactory";
-import * as tagSearch from "../utils/tagSearch"
+import * as optionFactory from "../factory/tagFactory";
+import * as tagSearch from "../utils/tagSearch";
 
 function searchRecipe(recipes, searchTerm) {
   let results = [];
@@ -20,10 +20,9 @@ function searchRecipe(recipes, searchTerm) {
 
 export function displayRecipeMainsearchBar(recipes) {
   selector.mainSearch.addEventListener("input", e => {
-    const recipesArray = searchRecipe(recipes, e.target.value)
-    recipeFactory.createRecipesCard(recipesArray)
-    optionFactory.displayDataListOption(recipesArray)
-    tagSearch.addTagButton(selector.tagContainer, recipesArray)
-   
+    const recipesArray = searchRecipe(recipes, e.target.value);
+    recipeFactory.createRecipesCard(recipesArray);
+    optionFactory.displayDataListOption(recipesArray);
+    tagSearch.addTagButton(selector.tagContainer, recipesArray);
   });
 }

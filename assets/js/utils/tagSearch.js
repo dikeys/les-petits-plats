@@ -2,142 +2,105 @@ import * as tagFactory from "../factory/tagFactory";
 import * as recipeFactory from "../factory/recipeFactory";
 import { selector } from "./selector";
 
-
 export function displayTagList(inputSelectors) {
-  for (const input of inputSelectors) {
+  inputSelectors.forEach(input => {
     input.addEventListener("focusin", e => {
-      e.target.placeholder =
-        "Rechercher un " + e.target.dataset.name.toLowerCase();
+      e.target.placeholder = `Rechercher un ${e.target.dataset.name.toLowerCase()}`;
       e.target.nextElementSibling.classList.add("search__data-list");
       e.target.previousElementSibling.classList.add("search__sort-img__active");
     });
-  }
+  });
 }
 
 export function hideTagList(inputSelectors) {
-  for (const input of inputSelectors) {
+  inputSelectors.forEach(input => {
     input.addEventListener("focusout", e => {
-      console.log( e.explicitOriginalTarget)
       if (
-        e.explicitOriginalTarget === selector.sectionSearch ||
-        e.explicitOriginalTarget === selector.recipeSection ||
-        e.explicitOriginalTarget === selector.headerSection ||
-        e.explicitOriginalTarget === selector.divTag
+        [selector.sectionSearch, selector.recipeSection, selector.headerSection, selector.divTag].includes(e.explicitOriginalTarget)
       ) {
         e.target.placeholder = e.target.dataset.name;
         e.target.nextElementSibling.classList.remove("search__data-list");
-        e.target.previousElementSibling.classList.remove(
-          "search__sort-img__active"
-        );
+        e.target.previousElementSibling.classList.remove("search__sort-img__active");
       }
     });
-  }
+  });
 }
 
 export function hideTagListAfterChose(selectors) {
-  for (const selector of selectors) {
+  selectors.forEach(selector => {
     selector.nextElementSibling.classList.remove("search__data-list");
-    selector.previousElementSibling.classList.remove(
-      "search__sort-img__active"
-    );
-  }
+    selector.previousElementSibling.classList.remove("search__sort-img__active");
+  });
 }
 
 export function filterTagList(inputSelectors) {
-  for (const inputSelector of inputSelectors) {
+  inputSelectors.forEach(inputSelector => {
     inputSelector.addEventListener("input", e => {
-      let text = e.target.value.toLowerCase();
-      let options = e.target.nextElementSibling.options;
-      for (const option of options) {
-        option.style.display = option.value
-          .toLowerCase()
-          .includes(text.toLowerCase())
+      const text = e.target.value.toLowerCase();
+      const options = Array.from(e.target.nextElementSibling.options);
+      options.forEach(option => {
+        option.style.display = option.value.toLowerCase().includes(text)
           ? "block"
           : "none";
-      }
+      });
     });
-  }
+  });
 }
 
 export function addTagButton(tagButtonContainer, recipeData) {
-  let arrayTag = document.querySelectorAll(".search__data-list__option");
-  for (let tag of arrayTag) {
+  const arrayTag = Array.from(document.querySelectorAll(".search__data-list__option"));
+  arrayTag.forEach(tag => {
     tag.addEventListener("click", e => {
       hideTagListAfterChose(selector.inputSearch);
 
       document.querySelector(".recipe").style.top = "450px";
-      let tagExists = false;
-      if (tagButtonContainer && tagButtonContainer.children) {
-        for (let tagExist of tagButtonContainer.children) {
-          if (tagExist.textContent === e.target.value) {
-            tagExists = true;
-            break;
-          }
-        }
-      }
+      const tagExists = Array.from(tagButtonContainer.children).some(tagExist => tagExist.textContent === e.target.value);
       if (!tagExists) {
         tagFactory.createButtonTag(e.target.value, e.target.parentNode.classList[0], tagButtonContainer);
-        let recipes = searchRecipesByKeywords(recipeData, tagButtonContainer.children);
+        const recipes = searchRecipesByKeywords(recipeData, tagButtonContainer.childNodes);
         recipeFactory.createRecipesCard(recipes);
         tagFactory.displayDataListOption(recipes);
-        removeTagButton(tagButtonContainer.children, recipeData);
+        removeTagButton(tagButtonContainer.childNodes, recipeData);
       }
     });
-  }
+  });
 }
 
 function removeTagButton(tagsSelectors, recipeData) {
-  for (let tag of tagsSelectors) {
+  tagsSelectors.forEach(tag => {
     tag.firstElementChild.addEventListener("click", e => {
       e.target.parentNode.remove();
       if (tagsSelectors.length < 1) {
         document.querySelector(".recipe").style.top = "400px";
       }
-      let recipes = searchRecipesByKeywords(recipeData, tagsSelectors);
+      const recipes = searchRecipesByKeywords(recipeData, tagsSelectors);
       recipeFactory.createRecipesCard(recipes);
       tagFactory.displayDataListOption(recipes);
     });
-  }
+  });
 }
+
+
 
 function searchRecipesByKeywords(data, keywords) {
-  const results = [];
-  for (const recipe of data) {
-    const recipeKeywords = [];
-    for (const ingredient of recipe.ingredients) {
-      recipeKeywords.push(ingredient.ingredient);
-    }
-    recipeKeywords.push(recipe.appliance);
-    for (const utensil of recipe.ustensils) {
-      recipeKeywords.push(utensil);
-    }
-    let match = true;
-    for (const keyword of keywords) {
-      let keywordFound = false;
-      for (const recipeKeyword of recipeKeywords) {
-        if (recipeKeyword.toLowerCase().includes(keyword.textContent.toLowerCase())
-        ) {
-          keywordFound = true;
-          break;
-        }
-      }
-      if (!keywordFound) {
-        match = false;
-        break;
-      }
-    }
-    if (match) {
-      results.push(recipe);
-    }
-  }
-  return results;
+  let arrayKeyword = []
+ 
+    keywords.forEach(word=>arrayKeyword.push(word.textContent) )
+
+  return data.filter(recipe => {
+    const recipeKeywords = [...recipe.ingredients.map(i => i.ingredient), recipe.appliance, ...recipe.ustensils];
+   
+    return arrayKeyword.every((keyword) => {
+      console.log(keyword)
+      recipeKeywords.some(recipeKeyword => recipeKeyword.toLowerCase().includes(keyword.toLowerCase()))
+    });
+  });
 }
 
-export function searchBytag(recipes){
-
-  for (let inputs of document.querySelectorAll(".search__input")) {
+export function searchBytag(recipes) {
+  Array.from(document.querySelectorAll(".search__input")).forEach(inputs => {
     inputs.addEventListener("focusin", e => {
-      this.addTagButton(selector.tagContainer, recipes);
+      addTagButton(selector.tagContainer, recipes);
     });
-  }
+  });
 }

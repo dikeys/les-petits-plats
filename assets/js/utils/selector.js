@@ -7,6 +7,7 @@ const selector = {
     sectionSearch : document.querySelector("section.search"),
     headerSection : document.querySelector("header.search"),
     recipeSection : document.querySelector("section.recipe"),
+    containerSection : document.querySelector("section.search__container"),
     divTag : document.querySelector("div#tag-list")
 }
 

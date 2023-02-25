@@ -22,7 +22,9 @@ export function hideTagList(inputSelectors) {
         e.explicitOriginalTarget === selector.sectionSearch ||
         e.explicitOriginalTarget === selector.recipeSection ||
         e.explicitOriginalTarget === selector.headerSection ||
-        e.explicitOriginalTarget === selector.divTag
+        e.explicitOriginalTarget === selector.divTag ||
+        e.explicitOriginalTarget === document.body ||
+        e.explicitOriginalTarget === selector.containerSection
       ) {
         e.target.placeholder = e.target.dataset.name;
         e.target.nextElementSibling.classList.remove("search__data-list");

@@ -2,25 +2,20 @@ import * as recipeFactory from "../factory/recipeFactory";
 import * as searchFactory from "../factory/tagFactory";
 
 function filterRecipesCard(data, inputSelectors) {
-  let arrayRecipes = [];
-  for (const inputSelector of inputSelectors) {
+  inputSelectors.forEach(inputSelector => {
     inputSelector.addEventListener("input", e => {
-      arrayRecipes = [];
-      for (const recipe of data) {
-        for (const ingredient of recipe.ingredients) {
-          if (
-            ingredient.ingredient
-              .toLowerCase()
-              .includes(e.target.value.toLowerCase())
-          ) {
-            arrayRecipes.push(recipe);
-            break;
+      const filterText = e.target.value.toLowerCase();
+      const filteredRecipes = [];
+      data.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+          if (ingredient.ingredient.toLowerCase().includes(filterText)) {
+            filteredRecipes.push(recipe);
           }
-        }
-      }
-      recipeFactory.createRecipesCard(arrayRecipes);
+        });
+      });
+      recipeFactory.createRecipesCard(filteredRecipes);
     });
-  }
+  });
 }
 
 export { filterRecipesCard };

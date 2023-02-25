@@ -12,62 +12,52 @@ async function displayDataListOption(recipeArray) {
     selector.ingredientDatalist
   ];
 
-  for (let i = 0; i < arrays.length; i++) {
-    createOption(arrays[i], selectors[i]);
-  }
+  arrays.forEach((arrayOption, i) => {
+    createOption(arrayOption, selectors[i]);
+  });
 }
 
 function createOption(arrayOption, selector) {
-  selector.innerHTML = ""
-  for (let optionData of arrayOption) {
+  selector.innerHTML = "";
+  arrayOption.forEach((optionData) => {
     let option = document.createElement("option");
     option.classList.add("search__data-list__option");
     option.value = optionData;
     option.textContent = optionData;
     selector.appendChild(option);
-  }
+  });
 }
 
 function arrayUstensils(recipeArray) {
-  let listAppliance = [];
-  for (let recipes of recipeArray) {
-    listAppliance.push(recipes.appliance);
-  }
-
+  let listAppliance = recipeArray.map((recipes) => recipes.appliance);
   return removeDuplicates(listAppliance);
 }
 
-
-
 function arrayIngredient(recipeArray) {
   let array = [];
-  for (let recipes of recipeArray) {
-    for (let recipe of recipes.ingredients) {
+  recipeArray.forEach((recipes) => {
+    recipes.ingredients.forEach((recipe) => {
       array.push(recipe.ingredient);
-    }
-  }
+    });
+  });
   return removeDuplicates(array);
 }
+
 function arrayAppliance(recipeArray) {
   let listUstensils = [];
-  for (let recipes of recipeArray) {
-    for (let recipe of recipes.ustensils) {
+  recipeArray.forEach((recipes) => {
+    recipes.ustensils.forEach((recipe) => {
       listUstensils.push(recipe);
-    }
-  }
+    });
+  });
   return removeDuplicates(listUstensils);
 }
 
 function removeDuplicates(array) {
-  let uniqueArray = new Set();
-  for (let item of array) {
-    uniqueArray.add(item.toLowerCase());
-  }
-  let result = [];
-  for (let item of uniqueArray) {
-    let match = array.find(arrItem => arrItem.toLowerCase() === item);
-    result.push(match || item);
-  }
+  let uniqueArray = new Set(array.map((item) => item.toLowerCase()));
+  let result = Array.from(uniqueArray).map((item) =>
+    array.find((arrItem) => arrItem.toLowerCase() === item)
+  );
   return result;
 }
 

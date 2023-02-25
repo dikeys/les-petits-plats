@@ -83,18 +83,36 @@ function removeTagButton(tagsSelectors, recipeData) {
 
 
 function searchRecipesByKeywords(data, keywords) {
-  let arrayKeyword = []
- 
-    keywords.forEach(word=>arrayKeyword.push(word.textContent) )
-
-  return data.filter(recipe => {
-    const recipeKeywords = [...recipe.ingredients.map(i => i.ingredient), recipe.appliance, ...recipe.ustensils];
-   
-    return arrayKeyword.every((keyword) => {
-      console.log(keyword)
-      recipeKeywords.some(recipeKeyword => recipeKeyword.toLowerCase().includes(keyword.toLowerCase()))
-    });
-  });
+  const results = [];
+  for (const recipe of data) {
+    const recipeKeywords = [];
+    for (const ingredient of recipe.ingredients) {
+      recipeKeywords.push(ingredient.ingredient);
+    }
+    recipeKeywords.push(recipe.appliance);
+    for (const utensil of recipe.ustensils) {
+      recipeKeywords.push(utensil);
+    }
+    let match = true;
+    for (const keyword of keywords) {
+      let keywordFound = false;
+      for (const recipeKeyword of recipeKeywords) {
+        if (recipeKeyword.toLowerCase().includes(keyword.textContent.toLowerCase())
+        ) {
+          keywordFound = true;
+          break;
+        }
+      }
+      if (!keywordFound) {
+        match = false;
+        break;
+      }
+    }
+    if (match) {
+      results.push(recipe);
+    }
+  }
+  return results;
 }
 
 export function searchBytag(recipes) {

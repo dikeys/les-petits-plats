@@ -4,18 +4,11 @@ import * as optionFactory from "../factory/tagFactory";
 import * as tagSearch from "../utils/tagSearch";
 
 function searchRecipe(recipes, searchTerm) {
-  let results = [];
-
-  for (const recipe of recipes) {
-    let search = recipe.name.toLowerCase() + recipe.description.toLowerCase();
-    for (const ingredient of recipe.ingredients) {
-      search += ingredient.ingredient.toLowerCase();
-    }
-    if (search.includes(searchTerm.toLowerCase())) {
-      results.push(recipe);
-    }
-  }
-  return results;
+  return recipes.filter(recipe => {
+    const search = recipe.name.toLowerCase() + recipe.description.toLowerCase() +
+      recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase()).join('');
+    return search.includes(searchTerm.toLowerCase());
+  });
 }
 
 export function displayRecipeMainsearchBar(recipes) {

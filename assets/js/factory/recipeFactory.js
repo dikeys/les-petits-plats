@@ -3,7 +3,10 @@ import selector from "./const";
 
 async function createRecipesCard(recipeArray) {
   selector.recipeSection.innerHTML = "";
-  for (let recipe of recipeArray) {
+  
+  recipeArray.forEach(recipe => {
+    
+
     let a = document.createElement("a")
     a.href = ""
     a.classList.add("card");
@@ -37,7 +40,7 @@ async function createRecipesCard(recipeArray) {
     article.appendChild(divContent);
     a.appendChild(article)
     selector.recipeSection.appendChild(a);
-  }
+  })
 
 
 }
@@ -45,13 +48,13 @@ async function createRecipesCard(recipeArray) {
 function addIngredientList(ingredientsList) {
   let divContainer = document.createElement("ul");
   divContainer.classList.add("card__content__ingredient");
-  for (let ingredients of ingredientsList) {
+  ingredientsList.forEach(ingredients => {
     let pIngredient = document.createElement("li");
 
     pIngredient.textContent = ingredients.ingredient + " : " + ingredients.quantity + (ingredients.unit ? ingredients.unit : "");
 
     divContainer.appendChild(pIngredient);
-  }
+  })
   return divContainer;
 }
 export { createRecipesCard };

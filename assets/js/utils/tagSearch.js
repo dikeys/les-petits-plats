@@ -17,6 +17,7 @@ export function displayTagList(inputSelectors) {
 export function hideTagList(inputSelectors) {
   for (const input of inputSelectors) {
     input.addEventListener("focusout", e => {
+      console.log( e.explicitOriginalTarget)
       if (
         e.explicitOriginalTarget === selector.sectionSearch ||
         e.explicitOriginalTarget === selector.recipeSection ||
@@ -101,40 +102,34 @@ function removeTagButton(tagsSelectors, recipeData) {
 
 function searchRecipesByKeywords(data, keywords) {
   const results = [];
-
-  data.forEach((recipe) => {
+  for (const recipe of data) {
     const recipeKeywords = [];
-    recipe.ingredients.forEach((ingredient) => {
+    for (const ingredient of recipe.ingredients) {
       recipeKeywords.push(ingredient.ingredient);
-    });
+    }
     recipeKeywords.push(recipe.appliance);
-    recipe.ustensils.forEach((utensil) => {
+    for (const utensil of recipe.ustensils) {
       recipeKeywords.push(utensil);
-    });
-
+    }
     let match = true;
-    console.log(keywords)
-    keywords.forEach((keyword) => {
+    for (const keyword of keywords) {
       let keywordFound = false;
-
-      recipeKeywords.forEach((recipeKeyword) => {
-        if (recipeKeyword.toLowerCase().includes(keyword.textContent.toLowerCase())) {
+      for (const recipeKeyword of recipeKeywords) {
+        if (recipeKeyword.toLowerCase().includes(keyword.textContent.toLowerCase())
+        ) {
           keywordFound = true;
-          return;
+          break;
         }
-      });
-
+      }
       if (!keywordFound) {
         match = false;
-        return;
+        break;
       }
-    });
-
+    }
     if (match) {
       results.push(recipe);
     }
-  });
-
+  }
   return results;
 }
 

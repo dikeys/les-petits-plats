@@ -16,7 +16,7 @@ export function hideTagList(inputSelectors) {
   inputSelectors.forEach(input => {
     input.addEventListener("focusout", e => {
       if (
-        [selector.sectionSearch, selector.recipeSection, selector.headerSection, selector.divTag].includes(e.explicitOriginalTarget)
+        [selector.sectionSearch, selector.recipeSection, selector.headerSection, selector.divTag, selector.containerSection, document.body].includes(e.explicitOriginalTarget)
       ) {
         e.target.placeholder = e.target.dataset.name;
         e.target.nextElementSibling.classList.remove("search__data-list");

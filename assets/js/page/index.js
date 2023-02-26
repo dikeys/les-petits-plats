@@ -8,7 +8,9 @@ import * as mainSearch from "../utils/mainSearchBar";
 
 async function init() {
   let recipes = await ajaxGet("../assets/js/data/recipes.json");
+  console.time('createRecipesCard')
   recipeFactory.createRecipesCard(recipes);
+  console.timeEnd('createRecipesCard')
   filterCard.filterRecipesCard(recipes, selector.inputSearch);
   optionFactory.displayDataListOption(recipes);
   tag.displayTagList(selector.inputSearch);

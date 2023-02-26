@@ -80,7 +80,13 @@ function removeTagButton(tagsSelectors, recipeData) {
   });
 }
 
+/**
 
+    Searches recipes by keywords.
+    @param {Array} data - The array of recipes to search.
+    @param {Array} keywords - The array of keywords to search for.
+    @returns {Array} - An array of recipes that match all the provided keywords.
+    */
 
 function searchRecipesByKeywords(data, keywords) {
   const results = [];

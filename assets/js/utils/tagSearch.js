@@ -2,6 +2,10 @@ import * as tagFactory from "../factory/tagFactory";
 import * as recipeFactory from "../factory/recipeFactory";
 import { selector } from "./selector";
 
+/**
+ * Show tags 
+ * @param {array} inputSelectors 
+ */
 export function displayTagList(inputSelectors) {
   inputSelectors.forEach(input => {
     input.addEventListener("focusin", e => {
@@ -12,6 +16,10 @@ export function displayTagList(inputSelectors) {
   });
 }
 
+/**
+ * Hide tags
+ * @param {array} inputSelectors | input
+ */
 export function hideTagList(inputSelectors) {
   inputSelectors.forEach(input => {
     input.addEventListener("focusout", e => {
@@ -26,6 +34,10 @@ export function hideTagList(inputSelectors) {
   });
 }
 
+/**
+ * Hide the list of tags when you click on a tag
+ * @param {array} selectors | all tags
+ */
 export function hideTagListAfterChose(selectors) {
   selectors.forEach(selector => {
     selector.nextElementSibling.classList.remove("search__data-list");
@@ -47,6 +59,8 @@ export function filterTagList(inputSelectors) {
   });
 }
 
+
+
 export function addTagButton(tagButtonContainer, recipeData) {
   const arrayTag = Array.from(document.querySelectorAll(".search__data-list__option"));
   arrayTag.forEach(tag => {
@@ -65,7 +79,11 @@ export function addTagButton(tagButtonContainer, recipeData) {
     });
   });
 }
-
+/**
+ * remove duplicate tags
+ * @param {array} tagsSelectors 
+ * @param {array} recipeData 
+ */
 function removeTagButton(tagsSelectors, recipeData) {
   tagsSelectors.forEach(tag => {
     tag.firstElementChild.addEventListener("click", e => {
